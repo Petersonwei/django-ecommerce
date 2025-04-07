@@ -15,3 +15,18 @@ class Cart():
 
         # Make sure cart is available on all pages of site
         self.cart = cart
+
+    def add(self, product, product_qty):
+
+        # Convert the product ID to a string to use as a dictionary key
+        product_id = str(product.id)
+
+        # Check if the product is already in the cart
+        if product_id in self.cart:
+            # If product exists, update the quantity
+            self.cart[product_id]['qty'] = product_qty
+        else:
+            # If product doesn't exist in cart, add it with price and quantity
+            self.cart[product_id] = {'price': str(product.price), 'qty': product_qty}
+
+        self.session.modified = True
