@@ -20,6 +20,8 @@ def cart_add(request):
 
         cart.add(product=product, quantity=product_quantity)
 
+        response = JsonResponse({'The prosuct is called:' : product.title, 'The quantity is:' : product_quantity})
+
 def cart_delete(request):
     pass    
 
