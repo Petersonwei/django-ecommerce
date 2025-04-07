@@ -30,3 +30,9 @@ class Cart():
             self.cart[product_id] = {'price': str(product.price), 'qty': product_qty}
 
         self.session.modified = True
+
+    def __len__(self):
+        """
+        Get the cart data and count the quantity of items
+        """
+        return sum(item['qty'] for item in self.cart.values())

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import JsonResponse
 from .cart import Cart
 
 from store.models import Product
@@ -18,9 +18,13 @@ def cart_add(request):
 
         product = get_object_or_404(Product, id=product_id)
 
-        cart.add(product=product, quantity=product_quantity)
+        cart.add(product=product, product_qty=product_quantity)
 
-        response = JsonResponse({'The prosuct is called:' : product.title, 'The quantity is:' : product_quantity})
+        cart_quantity = cart.__len__()
+
+        response = JsonResponse({'qty' : cart_quantity})
+
+        return response
 
 def cart_delete(request):
     pass    
