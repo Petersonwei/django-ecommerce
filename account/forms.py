@@ -11,6 +11,9 @@ class CreateUserForm(UserCreationForm):
         super(CreateUserForm, self).__init__(*args, **kwargs)
         # We don't need to add Bootstrap classes explicitly anymore
         # Crispy Forms will handle the styling
+        
+        # Mark email field as required
+        self.fields['email'].required = True
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
