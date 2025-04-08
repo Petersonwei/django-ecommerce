@@ -1,0 +1,61 @@
+{% include "store/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My Account Dashboard</h2>
+            <hr>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Account Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Username:</strong> {{ user.username }}</p>
+                            <p><strong>Email:</strong> {{ user.email }}</p>
+                            <p><strong>Date Joined:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">My Orders</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>View your order history and track current orders.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Orders</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Address Book</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Manage your shipping and billing addresses.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Manage Addresses</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %} 

@@ -1,0 +1,38 @@
+{% include "store/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<body style="background-color: gray;">
+
+<br>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow form-layout">
+                <div class="card-body p-5">
+                    <h3 class="mb-3 text-center">Verification Email Sent</h3>
+                    <p class="text-muted text-center mb-4">A verification link has been sent to your email address. Please check your inbox and click on the link to activate your account.</p>
+                    
+                    <div class="alert alert-info" role="alert">
+                        <i class="fa fa-info-circle"></i> If you don't see the email in your inbox, please check your spam folder.
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p class="mb-0">Didn't receive the email? <a href="#" class="text-primary">Resend verification email</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+</body>
+
+{% endblock %} 
