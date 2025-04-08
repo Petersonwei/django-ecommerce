@@ -146,10 +146,8 @@
         action: 'post'
       },
       success: function (json) {
-        // Update cart quantity
-        document.getElementById("cart-qty").innerHTML = json.qty
-        // Update cart total
-        document.getElementById("total").innerHTML = json.total
+        // Force reload from server instead of cache
+        location.reload(true);
       },
       error: function (xhr, errmsg, err) {}
     });
@@ -171,12 +169,8 @@
         action: 'post'
       },
       success: function (json) {
-        // Refresh page to see changes
-        location.reload();
-        // Update cart quantity
-        document.getElementById("cart-qty").innerHTML = json.qty
-        // Update cart total
-        document.getElementById("total").innerHTML = json.total
+        // Force reload from server instead of cache
+        location.reload(true);
       },
       error: function (xhr, errmsg, err) {}
     });
