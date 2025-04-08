@@ -35,6 +35,28 @@ class Cart():
 
         self.session.modified = True
 
+    def delete(self, product_id):
+        """
+        Delete item from cart
+        """
+        product_id = str(product_id)
+        
+        if product_id in self.cart:
+            del self.cart[product_id]
+            
+        self.session.modified = True
+
+    def update(self, product_id, product_qty):
+        """
+        Update item quantity in cart
+        """
+        product_id = str(product_id)
+        
+        if product_id in self.cart:
+            self.cart[product_id]['qty'] = product_qty
+            
+        self.session.modified = True
+
     def __len__(self):
         """
         Get the cart data and count the quantity of items

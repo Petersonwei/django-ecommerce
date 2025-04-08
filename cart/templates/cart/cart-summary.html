@@ -7,6 +7,7 @@
 
 {% block content %}
 
+{% csrf_token %}
 
 <main class="pt-5">
     
@@ -63,7 +64,7 @@
 
                   &nbsp; 
                   
-                  <select id="">
+                  <select id="select{{product.id}}">
                   
                     <option selected>
                   
@@ -71,19 +72,19 @@
                   
                     </option>
                   
-                    <option value="">1</option>
+                    <option value="1">1</option>
                   
-                    <option value="">2</option>
+                    <option value="2">2</option>
                   
-                    <option value="">3</option>
+                    <option value="3">3</option>
                   
-                    <option value="">4</option>
+                    <option value="4">4</option>
                   
                   </select>
                   
                   <br> <br>
 
-                  <button type="button" id="update-button"
+                  <button type="button" data-index="{{product.id}}"
                     class="btn btn-primary btn-sm update-button">
                     Update
                   
@@ -91,7 +92,7 @@
                   
                   &nbsp;
 
-                  <button type="button" id="delete-button"
+                  <button type="button" data-index="{{product.id}}"
                     class="btn btn-danger btn-sm delete-button">
                     Delete
         
@@ -126,6 +127,61 @@
  </main>
 
 
+<script>
+  // Update button
+  $(document).on('click', '.update-button', function (e) {
+    e.preventDefault();
+    var productid = $(this).data('index');
+    var productqty = $('#select' + productid + ' option:selected').val();
+    
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+    
+    $.ajax({
+      type: 'POST',
+      url: '{% url "cart-update" %}',
+      data: {
+        product_id: productid,
+        product_quantity: productqty,
+        csrfmiddlewaretoken: token,
+        action: 'post'
+      },
+      success: function (json) {
+        // Update cart quantity
+        document.getElementById("cart-qty").innerHTML = json.qty
+        // Update cart total
+        document.getElementById("total").innerHTML = json.total
+      },
+      error: function (xhr, errmsg, err) {}
+    });
+  });
+
+  // Delete button
+  $(document).on('click', '.delete-button', function (e) {
+    e.preventDefault();
+    var productid = $(this).data('index');
+    
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+    
+    $.ajax({
+      type: 'POST',
+      url: '{% url "cart-delete" %}',
+      data: {
+        product_id: productid,
+        csrfmiddlewaretoken: token,
+        action: 'post'
+      },
+      success: function (json) {
+        // Refresh page to see changes
+        location.reload();
+        // Update cart quantity
+        document.getElementById("cart-qty").innerHTML = json.qty
+        // Update cart total
+        document.getElementById("total").innerHTML = json.total
+      },
+      error: function (xhr, errmsg, err) {}
+    });
+  });
+</script>
 
 {% endblock %}
 
